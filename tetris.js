@@ -397,10 +397,30 @@ let resetVars = () => {
 
 // Event listener untuk input keyboard
 window.addEventListener("keydown", (event) => {
-  if (event.keyCode == 37) currentShape.moveLeft();
-  else if (event.keyCode == 38) currentShape.changeRotation();
-  else if (event.keyCode == 39) currentShape.moveRight();
-  else if (event.keyCode == 40) currentShape.moveBottom();
+  if (event.key === "a" || event.key === "A") currentShape.moveLeft(); // Move left when A is pressed
+  else if (event.key === "w" || event.key === "W") currentShape.changeRotation(); // Rotate when W is pressed
+  else if (event.key === "d" || event.key === "D") currentShape.moveRight(); // Move right when D is pressed
+  else if (event.key === "s" || event.key === "S") currentShape.moveBottom(); // Move down faster when S is pressed
+});
+
+// Event listener untuk tombol segitiga
+document.getElementById("triangleUpButton").addEventListener("click", function(event) {
+  currentShape.changeRotation(); // Memanggil fungsi untuk merotasi bentuk saat tombol segitiga ditekan
+});
+
+// Event listener untuk tombol bulat
+document.getElementById("triangleDownButton").addEventListener("click", function(event) {
+  currentShape.moveBottom(); // Memanggil fungsi untuk mempercepat turun saat tombol bulat ditekan
+});
+
+// Event listener untuk tombol X
+document.getElementById("triangleRightButton").addEventListener("click", function(event) {
+  currentShape.moveLeft(); // Memanggil fungsi untuk bergerak ke kiri saat tombol X ditekan
+});
+
+// Event listener untuk tombol kotak
+document.getElementById("triangleLeftButton").addEventListener("click", function(event) {
+  currentShape.moveRight(); // Memanggil fungsi untuk bergerak ke kanan saat tombol kotak ditekan
 });
 
 // Inisialisasi permainan
@@ -414,4 +434,3 @@ let gameLoop = () => {
 
 // Memulai permainan
 gameLoop();
-

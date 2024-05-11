@@ -1,55 +1,148 @@
-<html>
-  <head>
-    <title>Tetris Game</title>
-    <style>
-      button:hover {
-        background-color: #bca0dc !important;
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Tetris</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #8A2BE2, #FFFFFF);
+      font-family: "Press Start 2P", cursive;
+      background-size: cover;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      border: 2px solid #333;
+      background-color: #fff;
+    }
+    button {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background-color: #333;
+      border: 0px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #9969d0;
+    }
+    .full-height {
+      height: 100vh;
+    }
+    .control-list {
+      margin-top: 20px;
+    }
+    .list-group-item {
+      background-color: #f8f9fa;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    .list-group-item:hover {
+      background-color: #e9ecef;
+    }
+    .game-over {
+      text-align: center;
+      color: #6c757d;
+      font-size: 24px;
+      margin-top: 50px;
+    }
+    .game-over h1 {
+      color: #cc0000;
+      font-size: 36px;
+    }
+    /* Media queries untuk layar laptop */
+    @media only screen and (max-width: 992px) {
+      .col-md-8 {
+        width: 60%;
       }
-      button:active {
-        background-color: #9969d0 !important;
+      .col-md-2 {
+        width: 40%;
+        margin-top: 20px;
+        text-align: center;
       }
-    </style>
-  </head>
-  <body>
-    <canvas id="canvas" width="400" height="800"> </canvas>
-    <canvas
-      id="nextShapeCanvas"
-      width="200"
-      height="200"
-      style="position: absolute; top: 10"
-    >
-    </canvas>
-
-    <canvas
-      id="scoreCanvas"
-      width="200"
-      height="200"
-      style="position: absolute; top: 220"
-    >
-    </canvas>
-
-    <button
-      style="
+      .col-md-2 button {
+        width: 48px;
+        height: 48px;
+        display: block;
+        margin: 10px auto;
+      }
+      #scoreCanvas {
+        display: block;
+        margin: 20px auto;
+      }
+    }
+    /* Media queries untuk layar hp */
+    @media only screen and (max-width: 576px) {
+      .col-md-8 {
+        width: 100%;
+        text-align: center;
+      }
+      .col-md-2 {
+        width: 100%;
+        text-align: center;
+      }
+      .col-md-2 button {
         width: 64px;
         height: 64px;
-        border-radius: 50%;
-        background-color: gray;
-        border: 0px;
-      "
-      onClick="resetVars()"
-    >
-      <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-        <use class="ytp-svg-shadow" xlink:href="#ytp-id-54"></use>
-        <path
-          class="ytp-svg-fill"
-          fill="#ffffff"
-          d="M 18,11 V 7 l -5,5 5,5 v -4 c 3.3,0 6,2.7 6,6 0,3.3 -2.7,6 -6,6 -3.3,0 -6,-2.7 -6,-6 h -2 c 0,4.4 3.6,8 8,8 4.4,0 8,-3.6 8,-8 0,-4.4 -3.6,-8 -8,-8 z"
-          id="ytp-id-54"
-        ></path>
-      </svg>
-    </button>
-    <img id="image" src="rotations.png" style="display: none" />
+        display: inline-block;
+        margin: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid full-height">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-8">
+        <canvas id="canvas" width="400" height="800"></canvas>
+      </div>
+      <div class="col-md-2 text-center">
+        <!-- Tombol segitiga ke bawah -->
+        <button id="triangleDownButton" >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="blue" d="M12 22l-12-16h24z" />
+          </svg>
+        </button>
+        <!-- Tombol segitiga ke atas -->
+        <button id="triangleUpButton">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="green" d="M12 2l12 16h-24z" />
+          </svg>
+        </button>
+        <!-- Tombol segitiga ke kanan -->
+        <button id="triangleRightButton">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="red" d="M2 12l16 12v-24z" />
+          </svg>
+        </button>
+        <!-- Tombol segitiga ke kiri -->
+        <button id="triangleLeftButton">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="pink" d="M22 12l-16 12v-24z" />
+          </svg>
+        </button>
+        
+        <button onclick="resetVars()" style="margin-top: 35px; margin-left: 20px;">
+          <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+          <use class="ytp-svg-shadow" xlink:href="#ytp-id-54"></use>
+          <path class="ytp-svg-fill" fill="#ffffff" d="M 18,11 V 7 l -5,5 5,5 v -4 c 3.3,0 6,2.7 6,6 0,3.3 -2.7,6 -6,6 -3.3,0 -6,-2.7 -6,-6 h -2 c 0,4.4 3.6,8 8,8 4.4,0 8,-3.6 8,-8 0,-4.4 -3.6,-8 -8,-8 z"/>
+          </svg>
+        </button>
 
-    <script src="tetris.js"></script>
-  </body>
+      </div>
+      <div class="col-md-2">
+        <canvas id="nextShapeCanvas" width="200" height="200"></canvas>
+        <canvas id="scoreCanvas" width="200" height="200"></canvas>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  <img id="image" src="rotations.png" style="display: none" />
+  <script src="tetris.js"></script>
+</body>
 </html>
