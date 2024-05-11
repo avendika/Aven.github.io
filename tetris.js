@@ -397,10 +397,10 @@ let resetVars = () => {
 
 // Event listener untuk input keyboard
 window.addEventListener("keydown", (event) => {
-  if (event.key === "a" || event.key === "A") currentShape.moveLeft(); // Move left when A is pressed
-  else if (event.key === "w" || event.key === "W") currentShape.changeRotation(); // Rotate when W is pressed
-  else if (event.key === "d" || event.key === "D") currentShape.moveRight(); // Move right when D is pressed
-  else if (event.key === "s" || event.key === "S") currentShape.moveBottom(); // Move down faster when S is pressed
+  if (event.keyCode == 37) currentShape.moveLeft();
+  else if (event.keyCode == 38) currentShape.changeRotation();
+  else if (event.keyCode == 39) currentShape.moveRight();
+  else if (event.keyCode == 40) currentShape.moveBottom();
 });
 
 // Event listener untuk tombol segitiga
