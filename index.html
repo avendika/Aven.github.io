@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Pop-Up Start</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #8A2BE2, #FFFFFF);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .popup-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+    .popup {
+      background-color: #fff;
+      width: 80%;
+      max-width: 400px; /* Maksimum lebar pop-up */
+      margin: auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 16px; /* Ukuran font dalam piksel */
+    }
+
+    .btn {
+      padding: 12px 24px; /* Meningkatkan padding untuk membuat tombol lebih besar */
+      background-color: #007bff;
+      color: #fff;
+      border: 2px solid transparent; /* Menambahkan border dengan ketebalan 2px */
+      border-radius: 25px; /* Mengubah border-radius agar tombol terlihat lebih bulat */
+      cursor: pointer;
+      transition: all 0.3s ease; /* Efek transisi untuk perubahan hover */
+      font-family: 'Press Start 2P', cursive; /* Menggunakan font retro */
+      text-transform: uppercase; /* Mengubah teks menjadi huruf besar */
+      font-size: 16px; /* Mengatur ukuran font */
+      letter-spacing: 1px; /* Mengatur spasi antar huruf */
+      background-image: linear-gradient(135deg, #ffcc00, #ff00ff); /* Efek gradient */
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Efek bayangan */
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Bayangan yang lebih lembut saat dihover */
+    }
+
+    .title {
+      font-family: 'Press Start 2P', cursive; /* Menggunakan font retro */
+      font-size: 24px; /* Ukuran font dalam piksel */
+      color: #ff00ff; /* Warna teks */
+      text-shadow: 1px 1px 2px #000; /* Efek bayangan teks */
+      margin-bottom: 20px; /* Margin bawah untuk memisahkan dari teks lain */
+    }
+
+    .rules {
+      font-size: 14px; /* Ukuran font untuk aturan permainan */
+      margin-top: 20px; /* Margin atas untuk memisahkan dari judul */
+      text-align: center; /* Penyesuaian teks ke tengah */
+      color: orange; /* Warna teks */
+    }
+
+    .rules ol {
+      list-style-type: none; /* Menghilangkan tanda bullet */
+      padding-left: 0; /* Menghapus padding kiri pada daftar */
+      text-align: left; /* Penyesuaian teks ke kiri */
+    }
+
+    .rules ol li:before {
+      content: "➤"; /* Mengganti tanda bullet dengan icon */
+      color: orange; /* Warna ikon */
+      margin-right: 5px; /* Jarak antara ikon dan teks */
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container" id="popup-container">
+    <div class="popup">
+      <h2 class="title">Selamat Bermain!</h2>
+      <div class="rules">
+        <h3>Aturan Permainan:</h3>
+        <ol>
+          <li>Ada 4 tombol yakni tombol panah atas, bawah, kanan, dan kiri</li>
+          <li>Tombol atas untuk mengubah posisi dengan cara memutar bentuk baloknya.</li>
+          <li>Tombol bawah untuk mempercepat pergerakan balok untuk turun ke bawah.</li>
+          <li>Tombol kanan dan kiri untuk menggeser lokasi balok yang akan turun.</li>
+          <li>Ketika balok sudah sejajar tanpa ada space satu balok pun, maka balok yang sejajar tadi hilang dan berubah menjadi poin.</li>
+          <li>Tombol bawah di pencet maka poin bonus juga akan menambah.</li>
+          <li>Poin semakin tinggi balok keluar semakin cepat.</li>
+        </ol>
+      </div>
+      <button id="start-btn" class="btn">Mulai</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const popupContainer = document.getElementById('popup-container');
+      const startBtn = document.getElementById('start-btn');
+
+      startBtn.addEventListener('click', function () {
+        popupContainer.style.display = 'none';
+        window.location.href = "Mulai.html"; // Mengarahkan ke halaman index.html
+      });
+
+      popupContainer.style.display = 'flex';
+    });
+  </script>
+  <!-- Font Retro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+</body>
+</html>
